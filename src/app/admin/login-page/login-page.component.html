@@ -1,1 +1,18 @@
-<p>login-page works!</p>
+<form class="card" [formGroup]="form" (ngSubmit)="submit()">
+  <h2>Log in as admin</h2>
+  <div class="form-control">
+    <label for="email">Email:</label>
+    <input type="email" id="email" formControlName="email">
+  </div>
+
+  <div class="form-control">
+    <label for="password">Password:</label>
+    <input type="password" id="password" formControlName="password">
+  </div>
+  <button
+    type="submit"
+    class="btn btn-primary log"
+    [disabled]="form.invalid"
+  >Войти
+  </button>
+</form>
