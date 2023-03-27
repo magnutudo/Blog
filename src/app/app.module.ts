@@ -7,6 +7,11 @@ import { MainLayoutComponent } from './shared/components/main-layout/main-layout
 import { HomePageComponent } from './home-page/home-page.component';
 import { PostPageComponent } from './post-page/post-page.component';
 import { PostComponent } from './shared/components/post/post.component';
+import { CreatePageComponent } from './admin/create-page/create-page.component';
+import { LoginPageComponent } from './admin/login-page/login-page.component';
+import { DashboardPageComponent } from './admin/dashboard-page/dashboard-page.component';
+import { EditPageComponent } from './admin/edit-page/edit-page.component';
+import { AdminLayoutComponent } from './admin/shared/components/admin-layout/admin-layout.component';
 
 @NgModule({
   declarations: [
