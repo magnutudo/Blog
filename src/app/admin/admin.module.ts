@@ -7,21 +7,24 @@ import {AdminLayoutComponent} from "./shared/components/admin-layout/admin-layou
 import {DashboardPageComponent} from "./dashboard-page/dashboard-page.component";
 import {LoginPageComponent} from "./login-page/login-page.component";
 import {EditPageComponent} from "./edit-page/edit-page.component";
+import {AuthGuard} from "./shared/services/auth.guard";
+import {SharedModule} from "../shared/shared.module";
 
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    SharedModule,
     ReactiveFormsModule,
     RouterModule.forChild([
       {
         path: "", component: AdminLayoutComponent, children: [
           {path:"", redirectTo:"/admin/login",pathMatch:"full"},
           {path:"login",component:LoginPageComponent},
-          {path:"create",component:CreatePageComponent},
-          {path:"dashboard",component:DashboardPageComponent},
-          {path:"post/:id/edit",component:EditPageComponent}
+          {path:"create",component:CreatePageComponent,canActivate:[AuthGuard]},
+          {path:"dashboard",component:DashboardPageComponent,canActivate:[AuthGuard]},
+          {path:"post/:id/edit",component:EditPageComponent,canActivate:[AuthGuard]}
         ]
       }
     ])
@@ -33,7 +36,8 @@ import {EditPageComponent} from "./edit-page/edit-page.component";
     DashboardPageComponent,
     LoginPageComponent,
     EditPageComponent
-  ]
+  ],
+  providers:[AuthGuard]
 })
 export class AdminModule {
 
