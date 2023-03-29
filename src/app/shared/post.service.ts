@@ -33,5 +33,9 @@ export class PostService {
         }))
     }))
   }
+  remove(id:string):Observable<any>{
+    return this.http.delete(`${environment.fbUrl}/posts/${id}.json`)
+
+  }
 
 }

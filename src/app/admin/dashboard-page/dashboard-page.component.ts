@@ -8,22 +8,30 @@ import {Subscription} from "rxjs";
   templateUrl: './dashboard-page.component.html',
   styleUrls: ['./dashboard-page.component.scss']
 })
-export class DashboardPageComponent implements OnInit,OnDestroy{
-  posts:Post[]
-  constructor(private postService:PostService) {
+export class DashboardPageComponent implements OnInit, OnDestroy {
+  posts: Post[]
+
+  constructor(private postService: PostService) {
   }
-  sSub:Subscription
+
+  sSub: Subscription
 
   ngOnInit() {
-    this.sSub = this.postService.getAll().subscribe(posts =>{
+    this.sSub = this.postService.getAll().subscribe(posts => {
       this.posts = posts
     })
   }
 
   ngOnDestroy() {
-    if(this.sSub){
+    if (this.sSub) {
       this.sSub.unsubscribe()
     }
   }
 
+  remove(id: string) {
+    this.postService.remove(id).subscribe(() => {
+      this.posts = this.posts.filter(post => post.id != id)
+    })
+
+  }
 }
