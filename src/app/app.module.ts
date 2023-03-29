@@ -1,15 +1,25 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule, Provider} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
-import { HomePageComponent } from './home-page/home-page.component';
-import { PostPageComponent } from './post-page/post-page.component';
-import { PostComponent } from './shared/components/post/post.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {MainLayoutComponent} from './shared/components/main-layout/main-layout.component';
+import {HomePageComponent} from './home-page/home-page.component';
+import {PostPageComponent} from './post-page/post-page.component';
+import {PostComponent} from './shared/components/post/post.component';
 
 import {AuthService} from "./admin/shared/services/auth.service";
 import {SharedModule} from "./shared/shared.module";
+import {CommonModule} from "@angular/common";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {AuthInterceptor} from "./shared/auth.interceptor";
+
+const INTERCEPTOR_PROVIDER: Provider = {
+  provide: HTTP_INTERCEPTORS,
+  multi: true,
+  useClass: AuthInterceptor
+}
 
 @NgModule({
   declarations: [
@@ -23,9 +33,13 @@ import {SharedModule} from "./shared/shared.module";
     BrowserModule,
     AppRoutingModule,
     SharedModule,
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
     AppRoutingModule
   ],
-  providers: [AuthService],
+  providers: [AuthService,INTERCEPTOR_PROVIDER],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
