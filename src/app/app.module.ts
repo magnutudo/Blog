@@ -10,10 +10,12 @@ import {PostComponent} from './shared/components/post/post.component';
 
 import {AuthService} from "./admin/shared/services/auth.service";
 import {SharedModule} from "./shared/shared.module";
-import {CommonModule} from "@angular/common";
+import {CommonModule, registerLocaleData} from "@angular/common";
+import ruLocale from "@angular/common/locales/ru"
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AuthInterceptor} from "./shared/auth.interceptor";
+registerLocaleData(ruLocale,"ru")
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,

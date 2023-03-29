@@ -5,6 +5,7 @@ import {environment} from "../../environments/environment.development";
 import {map, Observable} from "rxjs";
 
 
+
 @Injectable({
   providedIn: "root"
 })
@@ -21,6 +22,16 @@ export class PostService {
           date:new Date(post.date)
         }
       }))
+  }
+  getAll():Observable<Post[]>{
+    return this.http.get(`${environment.fbUrl}/posts.json`)
+      .pipe(map((resp:{[key:string]:any})=>{
+        return Object.keys(resp).map(key =>({
+          ...resp[key],
+          id:key,
+          date: new Date(resp[key].date)
+        }))
+    }))
   }
 
 }
