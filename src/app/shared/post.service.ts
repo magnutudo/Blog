@@ -33,9 +33,22 @@ export class PostService {
         }))
     }))
   }
-  remove(id:string):Observable<any>{
+  remove(id:string):Observable<any> {
     return this.http.delete(`${environment.fbUrl}/posts/${id}.json`)
-
+  }
+  getById(id: string):Observable<Post> {
+    return this.http.get(`${environment.fbUrl}/posts/${id}.json`).pipe(
+      map((post:Post) => {
+        return {
+          ...post,
+          id:id,
+          date:new Date(post.date)
+        }
+      })
+    )
+  }
+  update(post:Post):Observable<Post>{
+    return this.http.patch<Post>(`${environment.fbUrl}/posts/${post.id}.json`,post)
   }
 
 }
