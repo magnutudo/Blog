@@ -9,6 +9,7 @@ import {LoginPageComponent} from "./login-page/login-page.component";
 import {EditPageComponent} from "./edit-page/edit-page.component";
 import {AuthGuard} from "./shared/services/auth.guard";
 import {SharedModule} from "../shared/shared.module";
+import {SearchPipe} from "./shared/search.pipe";
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {SharedModule} from "../shared/shared.module";
     CreatePageComponent,
     DashboardPageComponent,
     LoginPageComponent,
-    EditPageComponent
+    EditPageComponent,
+    SearchPipe
   ],
   providers:[AuthGuard]
 })
